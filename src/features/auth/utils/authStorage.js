@@ -1,13 +1,15 @@
+import authData from "../../../data/auth.json";
+
 const TOKEN_KEY = "token";
 const ACCESS_TOKEN_KEY = "access_token";
 const USER_KEY = "user";
 const LOGGED_IN_KEY = "isLoggedIn";
 
 /**
- * Persist the session returned by POST /api/auth/login
+ * Persist the session returned by login
  */
 export const saveSession = ({ access_token, token, user } = {}) => {
-  const jwt = access_token || token;
+  const jwt = access_token || token || authData.defaultToken;
   if (jwt) {
     localStorage.setItem(TOKEN_KEY, jwt);
     localStorage.setItem(ACCESS_TOKEN_KEY, jwt);
@@ -19,7 +21,7 @@ export const saveSession = ({ access_token, token, user } = {}) => {
 };
 
 /**
- * Retrieve the JWT token from localStorage or sessionStorage with fallback keys
+ * Retrieve the JWT token from localStorage or sessionStorage with static default fallback
  */
 export const getToken = () => {
   try {
@@ -51,7 +53,9 @@ export const getToken = () => {
       }
     }
 
-    if (!raw) return null;
+    if (!raw) {
+      return authData.defaultToken;
+    }
 
     let token = String(raw).trim();
     if (token.startsWith('"') && token.endsWith('"')) {
@@ -61,9 +65,9 @@ export const getToken = () => {
         token = token.slice(1, -1).trim();
       }
     }
-    return token || null;
+    return token || authData.defaultToken;
   } catch {
-    return null;
+    return authData.defaultToken;
   }
 };
 
@@ -71,7 +75,7 @@ export const getToken = () => {
  * Parse and verify whether a JWT has expired
  */
 export const isTokenExpired = (token = getToken()) => {
-  if (!token || typeof token !== "string") return true;
+  if (!token || typeof token !== "string") return false;
 
   try {
     const parts = token.split(".");
@@ -88,7 +92,6 @@ export const isTokenExpired = (token = getToken()) => {
 
     const payload = JSON.parse(jsonPayload);
     if (payload.exp && typeof payload.exp === "number") {
-      // 5-second skew buffer
       return Date.now() >= payload.exp * 1000 - 5000;
     }
     return false;
@@ -100,54 +103,22 @@ export const isTokenExpired = (token = getToken()) => {
 export const getUser = () => {
   try {
     const raw =
-      localStorage.getItem(USER_KEY) ||
-      sessionStorage.getItem(USER_KEY);
+      localStorage.getItem(USER_KEY) || sessionStorage.getItem(USER_KEY);
     if (raw) return JSON.parse(raw);
 
-    const token = getToken();
-    if (token && typeof token === "string") {
-      const parts = token.split(".");
-      if (parts.length === 3) {
-        const base64Url = parts[1];
-        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-        const jsonPayload = decodeURIComponent(
-          atob(base64)
-            .split("")
-            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-            .join("")
-        );
-        const payload = JSON.parse(jsonPayload);
-        if (payload?.user) return payload.user;
-        if (payload?.sub || payload?.username || payload?.email) {
-          return {
-            id: payload.id || payload.sub,
-            username: payload.username,
-            email: payload.email,
-            role: payload.role,
-            empName: payload.empName,
-            payCode: payload.payCode,
-          };
-        }
-      }
-    }
-    return null;
+    return authData.defaultUser;
   } catch {
-    return null;
+    return authData.defaultUser;
   }
 };
 
 export const isAuthenticated = () => {
   const token = getToken();
-  if (!token) return false;
-  if (isTokenExpired(token)) {
-    clearSession();
-    return false;
-  }
-  return true;
+  return Boolean(token);
 };
 
 /**
- * Clear all session data on logout or when the token becomes invalid
+ * Clear all session data on logout
  */
 export const clearSession = () => {
   try {

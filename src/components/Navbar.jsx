@@ -58,12 +58,19 @@ const resolveTitle = (pathname, activeMenu) => {
   }
 
   // 2. Dashboard navigation routes
-  if (cleanPath === "/dashboard") return "Dashboard";
+  if (cleanPath === "/dashboard" || cleanPath === "/dashboard/dashboard") return "Dashboard";
   if (cleanPath === "/dashboard/attendance") return "Attendance";
   if (cleanPath === "/dashboard/requirement") return "Requirement";
   if (cleanPath === "/home") return "Home Portal";
 
-  // 3. Fallback based on activeMenu or default
+  // 3. CMS navigation routes
+  if (cleanPath === "/cms" || cleanPath === "/cms/overview") return "Content Overview";
+  if (cleanPath === "/cms/documents") return "SOP & Documents";
+  if (cleanPath === "/cms/announcements") return "Announcements";
+  if (cleanPath === "/cms/templates") return "Media & Templates";
+  if (cleanPath.startsWith("/cms/")) return activeMenu || "Content Management";
+
+  // 4. Fallback based on activeMenu or default
   if (activeMenu) {
     if (activeMenu === "LMS") return "DOJO Hiring";
     if (activeMenu === "Dashboard" && cleanPath.startsWith("/lms")) return "Overview";
@@ -77,22 +84,23 @@ const Navbar = ({ activeMenu, setMobileOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [user, setUser] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(true);
+  const [user, setUser] = useState(() => {
+    try {
+      return getUser();
+    } catch {
+      return null;
+    }
+  });
 
   useEffect(() => {
     const loadUserData = () => {
       try {
-        const currentUser = getUser();
-        setUser(currentUser);
+        setUser(getUser());
       } catch (err) {
         console.error("Failed to load user profile in Navbar:", err);
-      } finally {
-        setLoadingUser(false);
       }
     };
 
-    loadUserData();
     window.addEventListener("storage", loadUserData);
     return () => {
       window.removeEventListener("storage", loadUserData);
@@ -120,7 +128,6 @@ const Navbar = ({ activeMenu, setMobileOpen }) => {
   return (
     <nav className="bg-white/85 backdrop-blur-md h-16 border-b border-[#e2edf2] flex items-center justify-between px-4 sm:px-6">
       <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-        {/* Mobile Sidebar Hamburger Toggle */}
         {setMobileOpen && (
           <button
             type="button"
@@ -132,7 +139,6 @@ const Navbar = ({ activeMenu, setMobileOpen }) => {
           </button>
         )}
 
-        {/* Back Button */}
         <button
           type="button"
           onClick={() => navigate(-1)}
@@ -142,7 +148,6 @@ const Navbar = ({ activeMenu, setMobileOpen }) => {
           <ArrowBackOutlinedIcon sx={{ fontSize: 18 }} />
         </button>
 
-        {/* Breadcrumb / Title */}
         <div className="flex items-center gap-2 min-w-0">
           <h1 className="text-base sm:text-lg font-bold text-[#0f172a] truncate">
             {title}
@@ -150,45 +155,32 @@ const Navbar = ({ activeMenu, setMobileOpen }) => {
         </div>
       </div>
 
-      {/* Middle & Right Section */}
       <div className="flex items-center gap-3 shrink-0">
-        {/* User Profile */}
-        {loadingUser ? (
-          <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/90 border border-[#e2edf2] shadow-xs animate-pulse">
-            <div className="h-7 w-7 rounded-full bg-gray-200" />
-            <div className="hidden sm:flex flex-col gap-1 text-left">
-              <div className="h-2.5 w-16 rounded bg-gray-200" />
-              <div className="h-2 w-20 rounded bg-gray-100" />
-            </div>
+        <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/90 border border-[#e2edf2] shadow-xs">
+          <div
+            className="h-7 w-7 rounded-full bg-gradient-to-tr from-[#0d9488] to-[#14b8a6] text-white flex items-center justify-center text-xs font-semibold shadow-xs select-none"
+            title={userName}
+          >
+            {userInitials}
           </div>
-        ) : (
-          <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/90 border border-[#e2edf2] shadow-xs">
-            <div
-              className="h-7 w-7 rounded-full bg-gradient-to-tr from-[#0d9488] to-[#14b8a6] text-white flex items-center justify-center text-xs font-semibold shadow-xs select-none"
+          <div className="hidden sm:flex flex-col text-left">
+            <span
+              className="text-xs font-semibold text-[#0f172a] leading-none truncate max-w-[140px]"
               title={userName}
             >
-              {userInitials}
-            </div>
-            <div className="hidden sm:flex flex-col text-left">
-              <span
-                className="text-xs font-semibold text-[#0f172a] leading-none truncate max-w-[140px]"
-                title={userName}
-              >
-                {userName}
-              </span>
-              <span
-                className="text-[10px] text-[#64748b] leading-none mt-1 truncate max-w-[140px]"
-                title={userRoleOrDept}
-              >
-                {userRoleOrDept}
-              </span>
-            </div>
+              {userName}
+            </span>
+            <span
+              className="text-[10px] text-[#64748b] leading-none mt-1 truncate max-w-[140px]"
+              title={userRoleOrDept}
+            >
+              {userRoleOrDept}
+            </span>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );
 };
 
 export default Navbar;
-

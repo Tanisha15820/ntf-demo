@@ -7,45 +7,25 @@ import Sidebar from "../../../components/Sidebar";
 import Navbar from "../../../components/Navbar";
 import KPICards from "../../../components/KPICards";
 import Filters from "../../../components/Filters";
-// import OperatorTraining from "../components/OperatorTraining";
 import { lmsMenus } from "../data/LMSMenu";
-// import TrainingPlan from "../components/TrainingPlan";
-// import ManRelatedDefects from "../components/ManRelatedDefects";
-// import TrainingPlanActual from "../components/TrainingPlanActual";
-// import ManPowerTrend from "../components/ManpowerTrend";
-// import AttritionAbsentism from "../components/AttritionAbsentism";
+import { mockLms } from "../../../data/mockStore";
 
-const kpiData = [
-  {
-    title: "Total Operators",
-    value: 10,
-    color: "blue",
-    icon: <PeopleAltOutlinedIcon sx={{ fontSize: 24 }} />,
-  },
-  {
-    title: "Total Sections",
-    value: 318,
-    color: "green",
-    icon: <PersonOutlinedIcon sx={{ fontSize: 24 }} />,
-  },
-  {
-    title: "Total Courses",
-    value: 670,
-    color: "red",
-    icon: <GroupsOutlinedIcon sx={{ fontSize: 24 }} />,
-  },
-  {
-    title: "Dojo Hiring",
-    value: "85.2%",
-    color: "purple",
-    icon: <SignalCellularAltRoundedIcon sx={{ fontSize: 24 }} />,
-  },
-];
+const ICON_MAP = {
+  "total-operators": <PeopleAltOutlinedIcon sx={{ fontSize: 24 }} />,
+  "total-sections": <PersonOutlinedIcon sx={{ fontSize: 24 }} />,
+  "total-courses": <GroupsOutlinedIcon sx={{ fontSize: 24 }} />,
+  "dojo-hiring": <SignalCellularAltRoundedIcon sx={{ fontSize: 24 }} />,
+};
 
 const LMSDashboard = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [activeMenu, setActiveMenu] = useState("Overview");
+
+  const kpiData = mockLms.getOverviewKpis().map((kpi) => ({
+    ...kpi,
+    icon: ICON_MAP[kpi.id] || <PeopleAltOutlinedIcon sx={{ fontSize: 24 }} />,
+  }));
 
   return (
     <div className="flex h-screen bg-[#F7F7F5] overflow-hidden">
@@ -67,12 +47,6 @@ const LMSDashboard = () => {
         <main className="flex-1 overflow-y-auto px-6 pt-5 pb-8 space-y-6">
           <KPICards data={kpiData} />
           <Filters />
-          {/* <OperatorTraining />
-          <TrainingPlan />
-          <ManRelatedDefects />
-          <TrainingPlanActual />
-          <ManPowerTrend />
-          <AttritionAbsentism /> */}
         </main>
       </div>
     </div>

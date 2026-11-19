@@ -26,7 +26,7 @@ import UserProfile from "../features/lms/pages/UserProfile";
 import TrainingEffectivenessPage from "../features/lms/pages/TrainingEffectivenessPage";
 import OperatorObservancePage from "../features/lms/pages/OperatorObservancePage";
 import SavedPaperPreview from "../features/lms/pages/SavedPaperPreview";
-
+import CMSPage from "../features/cms/pages/CMSPage";
 
 const App = () => {
   return (
@@ -34,9 +34,14 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+
+        {/* Dashboard Module */}
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/attendance" element={<Attendance />} />
         <Route path="/dashboard/requirement" element={<Requirement />} />
+
+        {/* LMS Module */}
         <Route path="/lms" element={<Navigate to="/lms/dashboard" replace />} />
         <Route path="/lms/dashboard" element={<LMSDashboard />} />
         <Route path="/lms/dojo-hiring" element={<LMS />} />
@@ -82,8 +87,18 @@ const App = () => {
         <Route path="/lms/l1/preview" element={<L1Preview />} />
         <Route path="/lms/paper/preview/:id" element={<SavedPaperPreview />} />
         <Route path="/lms/training" element={<TrainingEffectivenessPage />} />
-        <Route path="/lms/operator-observance" element={<OperatorObservancePage />} />
+        <Route
+          path="/lms/operator-observance"
+          element={<OperatorObservancePage />}
+        />
 
+        {/* CMS Module */}
+        <Route path="/cms" element={<CMSPage />} />
+        <Route path="/cms/overview" element={<CMSPage />} />
+        <Route path="/cms/documents" element={<CMSPage />} />
+        <Route path="/cms/announcements" element={<CMSPage />} />
+        <Route path="/cms/templates" element={<CMSPage />} />
+        <Route path="/cms/:pageKey" element={<CMSPage />} />
       </Routes>
     </BrowserRouter>
   );

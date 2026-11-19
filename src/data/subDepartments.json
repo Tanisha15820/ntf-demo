@@ -1,0 +1,72 @@
+[
+  {
+    "id": 101,
+    "plantId": 1,
+    "departmentId": 1,
+    "subDepartmentName": "Wiring Harness",
+    "name": "Wiring Harness"
+  },
+  {
+    "id": 102,
+    "plantId": 1,
+    "departmentId": 1,
+    "subDepartmentName": "Final Assembly",
+    "name": "Final Assembly"
+  },
+  {
+    "id": 103,
+    "plantId": 1,
+    "departmentId": 2,
+    "subDepartmentName": "Molding",
+    "name": "Molding"
+  },
+  {
+    "id": 104,
+    "plantId": 1,
+    "departmentId": 2,
+    "subDepartmentName": "Trimming & Finishing",
+    "name": "Trimming & Finishing"
+  },
+  {
+    "id": 105,
+    "plantId": 1,
+    "departmentId": 3,
+    "subDepartmentName": "Quality Assurance",
+    "name": "Quality Assurance"
+  },
+  {
+    "id": 106,
+    "plantId": 2,
+    "departmentId": 4,
+    "subDepartmentName": "Logistics",
+    "name": "Logistics"
+  },
+  {
+    "id": 107,
+    "plantId": 2,
+    "departmentId": 5,
+    "subDepartmentName": "Injection Molding",
+    "name": "Injection Molding"
+  },
+  {
+    "id": 108,
+    "plantId": 3,
+    "departmentId": 6,
+    "subDepartmentName": "Surface Coating",
+    "name": "Surface Coating"
+  },
+  {
+    "id": 109,
+    "plantId": 3,
+    "departmentId": 7,
+    "subDepartmentName": "Preventive Maintenance",
+    "name": "Preventive Maintenance"
+  },
+  {
+    "id": 110,
+    "plantId": 4,
+    "departmentId": 8,
+    "subDepartmentName": "Bumper Line",
+    "name": "Bumper Line"
+  }
+]

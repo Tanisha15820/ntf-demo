@@ -9,6 +9,7 @@ const Attendance = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [activeMenu, setActiveMenu] = useState("Attendance");
+  const [filterValues, setFilterValues] = useState({});
 
   return (
     <div className="flex h-screen bg-[#F7F7F5] overflow-hidden">
@@ -28,8 +29,8 @@ const Attendance = () => {
         </div>
 
         <main className="flex-1 overflow-y-auto px-6 pt-5 pb-8 space-y-6">
-          <Filters />
-          <AttendanceTable />
+          <Filters values={filterValues} onChange={setFilterValues} />
+          <AttendanceTable filters={filterValues} />
         </main>
       </div>
     </div>

@@ -1,4 +1,3 @@
-
 import PaymentsIcon from "@mui/icons-material/Payments";
 import {
   Chart as ChartJS,
@@ -10,6 +9,7 @@ import {
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Bar } from "react-chartjs-2";
+import dashboardData from "../../../data/dashboard.json";
 
 ChartJS.register(
   CategoryScale,
@@ -20,44 +20,22 @@ ChartJS.register(
   ChartDataLabels
 );
 
-const labels = [
-  "01 May",
-  "02 May",
-  "03 May",
-  "04 May",
-  "05 May",
-  "06 May",
-  "07 May",
-  "08 May",
-  "09 May",
-  "10 May",
-  "11 May",
-  "12 May",
-  "13 May",
-  "14 May",
-  "15 May",
-  "16 May",
-];
+const { labels, regularWages } = dashboardData.dailySalary;
 
 const chartData = {
   labels,
   datasets: [
     {
       label: "Regular Wages",
-      data: [
-        121.5, 134.2, 118.6, 142.8, 129.4, 96.3, 155.1, 127.7,
-        138.5, 122.9, 146.2, 131.8, 108.4, 152.6, 125.3, 141.9,
-      ],
+      data: regularWages,
       backgroundColor: "#38bdf8",
       barThickness: 25,
-
       borderRadius: {
         topLeft: 5,
         topRight: 5,
         bottomLeft: 0,
         bottomRight: 0,
       },
-
       borderSkipped: "bottom",
     },
   ],
@@ -68,23 +46,18 @@ const yAxisFormatter = (val) => `₹${val}k`;
 const options = {
   responsive: true,
   maintainAspectRatio: false,
-
   interaction: {
     mode: "index",
     intersect: false,
   },
-
   plugins: {
     legend: {
       display: false,
     },
-
     tooltip: {
       enabled: false,
-      external: () => { },
+      external: () => {},
     },
-
-    // Number displayed on top of every bar
     datalabels: {
       display: true,
       anchor: "end",
@@ -99,59 +72,43 @@ const options = {
       formatter: (value) => `₹${value}k`,
     },
   },
-
   scales: {
     x: {
       offset: true,
-
       grid: {
         display: false,
         drawBorder: false,
       },
-
       border: {
         display: false,
       },
-
       barPercentage: 0.98,
       categoryPercentage: 0.4,
-
       ticks: {
         color: "#64748B",
-
         font: {
           size: 10,
           weight: "500",
         },
-
         padding: 5,
       },
     },
-
     y: {
       beginAtZero: true,
-
       ticks: {
         stepSize: 50,
-
         color: "#64748B",
-
         font: {
           size: 9,
         },
-
         padding: 8,
-
         callback: (value) => yAxisFormatter(value),
       },
-
-      // Horizontal lines removed
       grid: {
         display: false,
         color: "#e8f1f5",
         drawTicks: false,
       },
-
       border: {
         display: false,
       },
@@ -162,12 +119,9 @@ const options = {
 const DailySalary = () => {
   return (
     <div className="bg-white/85 backdrop-blur-md rounded-2xl md:rounded-3xl border border-[#e2edf2] shadow-[0_4px_24px_rgba(15,23,42,0.03)] overflow-hidden">
-      {/* Header */}
       <div className="px-5 pt-4">
         <div className="flex items-center justify-between">
-          {/* Left side */}
           <div className="flex items-center gap-3">
-            {/* Icon - same color as graph */}
             <div className="w-10 h-10 rounded-xl bg-[#e6f7f5] border border-[#0d9488]/20 flex items-center justify-center text-[#0d9488] shadow-xs">
               <PaymentsIcon sx={{ fontSize: 20 }} />
             </div>
@@ -185,7 +139,6 @@ const DailySalary = () => {
         </div>
       </div>
 
-      {/* Scrollable Chart */}
       <div className="px-4 pb-4 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent">
         <div
           className="h-[230px]"
@@ -197,12 +150,9 @@ const DailySalary = () => {
         </div>
       </div>
 
-      {/* Legend */}
       <div className="flex justify-center items-center gap-4 pb-4">
-        {/* Regular Wages */}
         <div className="flex items-center gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-[#38bdf8]"></span>
-
           <span className="text-xs font-medium text-[#666666]">
             Daily Salary Distribution
           </span>
@@ -213,5 +163,3 @@ const DailySalary = () => {
 };
 
 export default DailySalary;
-
-

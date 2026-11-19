@@ -2,174 +2,27 @@ import { useRef, useState } from "react";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { Upload } from "lucide-react";
+import { Search, Upload } from "lucide-react";
+import DashboardApi from "../services/DashboardApi";
 
-const preColumns = [
-  "SNo.",
-  "PAYCODE",
-  "Card No",
-  "Employee Name",
-  "Department Name",
-  "Subdepartment Name",
-  "Designation",
-  "Date Of Join",
-];
+const { preColumns, dateColumns, postColumns } =
+  DashboardApi.getAttendanceConfig();
 
-const dateColumns = [
-  "01/09",
-  "02/09",
-  "03/09",
-  "04/09",
-  "05/09",
-  "06/09",
-  "07/09",
-  "08/09",
-  "09/09",
-  "10/09",
-  "11/09",
-  "12/09",
-  "13/09",
-  "14/09",
-];
+const TOTAL_COLUMNS =
+  preColumns.length + dateColumns.length * 2 + postColumns.length;
 
-const postColumns = [
-  "DW",
-  "HLD",
-  "CL",
-  "EL",
-  "ML",
-  "PL",
-  "SL",
-  "REST",
-  "TOTAL",
-  "ABS",
-  "Paid_Days",
-];
-
-const TOTAL_COLUMNS = preColumns.length + dateColumns.length * 2 + postColumns.length;
-
-const rows = [
-  {
-    id: 1,
-    sno: 1,
-    paycode: "10144",
-    cardNo: "00010144",
-    employeeName: "Vishnu",
-    departmentName: "LB",
-    subDepartmentName: "LB",
-    designation: "ASSEMBLER",
-    dateOfJoin: "01/11/2018",
-    attendance: [
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "HLD", b: "HLD" },
-      { a: "P", b: "P" },
-      { a: "WO", b: "WO" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "WO", b: "WO" },
-      { a: "HLD", b: "HLD" },
-    ],
-    dw: 10,
-    hld: 2,
-    cl: 0.0,
-    el: 0.0,
-    ml: 0.0,
-    pl: 0.0,
-    sl: 0.0,
-    rest: 2,
-    total: 14,
-    abs: 0,
-    paidDays: 14,
-  },
-  {
-    id: 2,
-    sno: 2,
-    paycode: "10382",
-    cardNo: "00010382",
-    employeeName: "DEEPAK",
-    departmentName: "ACCESSORIES",
-    subDepartmentName: "ACCESSORIES",
-    designation: "HELPER",
-    dateOfJoin: "18/06/2020",
-    attendance: [
-      { a: "A", b: "A" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "HLD", b: "HLD" },
-      { a: "P", b: "P" },
-      { a: "WO", b: "WO" },
-      { a: "A", b: "A" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "A", b: "A" },
-      { a: "P", b: "P" },
-      { a: "WO", b: "WO" },
-      { a: "HLD", b: "HLD" },
-    ],
-    dw: 7,
-    hld: 2,
-    cl: 0.0,
-    el: 0.0,
-    ml: 0.0,
-    pl: 0.0,
-    sl: 0.0,
-    rest: 2,
-    total: 14,
-    abs: 3,
-    paidDays: 11,
-  },
-  {
-    id: 3,
-    sno: 3,
-    paycode: "10503",
-    cardNo: "00010503",
-    employeeName: "Virender",
-    departmentName: "STORE",
-    subDepartmentName: "STORE",
-    designation: "HELPER",
-    dateOfJoin: "26/05/2021",
-    attendance: [
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "HLD", b: "HLD" },
-      { a: "P", b: "P" },
-      { a: "POW", b: "POW" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "P", b: "P" },
-      { a: "WO", b: "WO" },
-      { a: "POH", b: "POH" },
-    ],
-    dw: 10,
-    hld: 2,
-    cl: 0.0,
-    el: 0.0,
-    ml: 0.0,
-    pl: 0.0,
-    sl: 0.0,
-    rest: 2,
-    total: 14,
-    abs: 0,
-    paidDays: 14,
-  },
-];
-
-const AttendanceTable = () => {
+const AttendanceTable = ({ filters = {} }) => {
+  const [rows] = useState(() => DashboardApi.getAttendanceRows());
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [search] = useState("");
+  const [search, setSearch] = useState("");
+  const [toast, setToast] = useState("");
   const fileInputRef = useRef(null);
+
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(""), 2500);
+  };
 
   const handleUploadClick = () => {
     fileInputRef.current?.click();
@@ -178,7 +31,7 @@ const AttendanceTable = () => {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log("Uploading attendance file:", file.name);
+      showToast(`Imported attendance sheet: ${file.name}`);
     }
     e.target.value = "";
   };
@@ -192,12 +45,51 @@ const AttendanceTable = () => {
     setPage(0);
   };
 
-  const filteredRows = rows.filter(
-    (row) =>
-      row.employeeName.toLowerCase().includes(search.toLowerCase()) ||
-      row.cardNo.toLowerCase().includes(search.toLowerCase()) ||
-      row.departmentName.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredRows = rows.filter((row) => {
+    const q = search.trim().toLowerCase();
+    const matchesSearch =
+      !q ||
+      String(row.employeeName || "").toLowerCase().includes(q) ||
+      String(row.cardNo || "").toLowerCase().includes(q) ||
+      String(row.paycode || "").toLowerCase().includes(q) ||
+      String(row.departmentName || "").toLowerCase().includes(q);
+
+    const matchesPlant =
+      !filters.plant ||
+      !row.plant ||
+      String(row.plant).toLowerCase() === String(filters.plant).toLowerCase();
+    const matchesDept =
+      !filters.department ||
+      String(row.departmentName || "").toLowerCase() ===
+        String(filters.department).toLowerCase();
+    const matchesSubDept =
+      !filters.subDepartment ||
+      String(row.subDepartmentName || "").toLowerCase() ===
+        String(filters.subDepartment).toLowerCase();
+    const matchesLine =
+      !filters.line ||
+      !row.line ||
+      String(row.line).toLowerCase() === String(filters.line).toLowerCase();
+    const matchesMachine =
+      !filters.machine ||
+      !row.machine ||
+      String(row.machine).toLowerCase() ===
+        String(filters.machine).toLowerCase();
+    const matchesShift =
+      !filters.shift ||
+      !row.shift ||
+      String(row.shift).toLowerCase() === String(filters.shift).toLowerCase();
+
+    return (
+      matchesSearch &&
+      matchesPlant &&
+      matchesDept &&
+      matchesSubDept &&
+      matchesLine &&
+      matchesMachine &&
+      matchesShift
+    );
+  });
 
   const displayedRows = filteredRows.slice(
     page * rowsPerPage,
@@ -224,18 +116,39 @@ const AttendanceTable = () => {
             <h2 className="text-base font-bold text-[#0f172a] leading-tight">
               Attendance Records
             </h2>
-            <p className="text-xs text-[#64748b]">Employee attendance details and records</p>
+            <p className="text-xs text-[#64748b]">
+              Employee attendance details and records
+            </p>
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={handleUploadClick}
-          className="flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#0d9488] to-[#14b8a6] px-4 py-2 text-xs font-semibold text-white shadow-sm shadow-[#0d9488]/25 transition-all duration-200 hover:from-[#0f766e] hover:to-[#0d9488] active:scale-[0.99]"
-        >
-          <Upload size={15} strokeWidth={2.5} />
-          Upload
-        </button>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="relative w-full sm:w-64">
+            <Search
+              size={14}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setPage(0);
+              }}
+              placeholder="Search employee, paycode, dept..."
+              className="h-9 w-full rounded-xl border border-[#e2edf2] bg-white pl-9 pr-3 text-xs text-[#0f172a] outline-none focus:border-[#0d9488] focus:ring-2 focus:ring-[#0d9488]/15"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={handleUploadClick}
+            className="flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#0d9488] to-[#14b8a6] px-4 py-2 text-xs font-semibold text-white shadow-sm shadow-[#0d9488]/25 transition-all duration-200 hover:from-[#0f766e] hover:to-[#0d9488] active:scale-[0.99]"
+          >
+            <Upload size={15} strokeWidth={2.5} />
+            Upload
+          </button>
+        </div>
 
         <input
           ref={fileInputRef}
@@ -276,8 +189,6 @@ const AttendanceTable = () => {
                 </th>
               ))}
             </tr>
-
-
           </thead>
 
           <tbody>
@@ -295,8 +206,9 @@ const AttendanceTable = () => {
             {displayedRows.map((row, rowIdx) => (
               <tr
                 key={row.id}
-                className={`whitespace-nowrap transition hover:bg-[#F7F7F5] ${rowIdx % 2 === 1 ? "bg-gray-50/50" : "bg-white"
-                  }`}
+                className={`whitespace-nowrap transition hover:bg-[#F7F7F5] ${
+                  rowIdx % 2 === 1 ? "bg-gray-50/50" : "bg-white"
+                }`}
               >
                 <td className="px-3 py-3 text-[11px] font-medium text-gray-500 border-b border-r border-gray-100 text-center">
                   {row.sno}
@@ -417,6 +329,12 @@ const AttendanceTable = () => {
           </div>
         </div>
       </div>
+
+      {toast && (
+        <div className="fixed bottom-5 right-5 z-50 rounded-xl border border-[#0d9488] bg-[#0f172a] px-4 py-2.5 text-xs font-semibold text-white shadow-xl">
+          {toast}
+        </div>
+      )}
     </div>
   );
 };

@@ -6,23 +6,7 @@ const OCS_DAYS = 7;
 const OCS_CYCLES = 10;
 const OCS_OBS_COLS = OCS_DAYS * OCS_CYCLES;
 
-const OCS_COLUMNS = {
-  sno: 61,
-  description: 392,
-  cycle: 52,
-  method: 60,
-};
-
-const OCS_LEFT_WIDTH =
-  OCS_COLUMNS.sno +
-  OCS_COLUMNS.description +
-  OCS_COLUMNS.cycle +
-  OCS_COLUMNS.method;
-
 const OCS_SHEET_WIDTH = 1866;
-const OCS_OBS_WIDTH = OCS_SHEET_WIDTH - OCS_LEFT_WIDTH;
-const OCS_DAY_WIDTH = OCS_OBS_WIDTH / OCS_DAYS;
-const OCS_CELL_WIDTH = OCS_DAY_WIDTH / OCS_CYCLES;
 
 const OCS_ROW_HEIGHTS = Array(21).fill(28);
 const OCS_SHEETS = ["L-4", "L-3", "L-2"];
@@ -683,7 +667,7 @@ function OCSTableBody({ ws, sheet }) {
 
   const rows = useMemo(
     () => ocsGetRows(ws, config.rows),
-    [ws, sheet]
+    [ws, config.rows]
   );
 
   return (
@@ -1129,7 +1113,8 @@ export default function OperatorObservanceForm() {
   const [activeSheet, setActiveSheet] = useState("L-4");
 
   useEffect(() => {
-    fetch("/checksheet.xlsx")
+    const baseUrl = (import.meta.env.BASE_URL || "/").replace(/\/+$/, "");
+    fetch(`${baseUrl}/checksheet.xlsx`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Unable to load checksheet.xlsx");

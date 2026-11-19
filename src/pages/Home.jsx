@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
@@ -29,18 +29,15 @@ const formatRole = (role) => {
 
 const Home = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(true);
-
-  useEffect(() => {
+  const [user] = useState(() => {
     try {
-      setUser(getUser());
+      return getUser();
     } catch (err) {
       console.error("Failed to load user in Home:", err);
-    } finally {
-      setLoadingUser(false);
+      return null;
     }
-  }, []);
+  });
+  const loadingUser = false;
 
   const userName =
     user?.empName?.trim() ||

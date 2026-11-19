@@ -28,7 +28,6 @@ const Operators = ({ operators: propOperators, setOperators: propSetOperators })
 
   const [filterValues, setFilterValues] = useState({});
   const [search, setSearch] = useState("");
-
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [editingOperator, setEditingOperator] = useState(null);
   const [form, setForm] = useState(EMPTY_USER_FORM);

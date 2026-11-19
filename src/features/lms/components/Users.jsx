@@ -19,7 +19,6 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import Filters from "../../../components/Filters";
 import {
   filterUsers,
-  getUserDepartmentOptions,
   EMPTY_USER_FORM,
   USER_FORM_FIELDS,
   USER_COLUMNS,
@@ -396,7 +395,7 @@ const Users = ({ users: propUsers, setUsers: propSetUsers }) => {
   const [lines, setLines] = useState([]);
   const [machines, setMachines] = useState([]);
   const [plants, setPlants] = useState([]);
-  const [shifts, setShifts] = useState([]);
+  const [shifts] = useState([]);
   const [loadingDropdowns, setLoadingDropdowns] = useState(false);
   const [loadingPlants, setLoadingPlants] = useState(false);
   const [plantsError, setPlantsError] = useState("");
@@ -527,7 +526,7 @@ const Users = ({ users: propUsers, setUsers: propSetUsers }) => {
       !loadingPlants &&
       !loadingDropdowns
     ) {
-      fetchPlants();
+      Promise.resolve().then(() => fetchPlants());
     }
   }, [formModalOpen, plants.length, loadingPlants, loadingDropdowns, fetchPlants]);
 
@@ -683,8 +682,6 @@ const Users = ({ users: propUsers, setUsers: propSetUsers }) => {
   };
 
   /* ===================== TABLE DATA & PAGINATION ===================== */
-
-  const departmentOptions = getUserDepartmentOptions(users);
 
   const tableRows = filterUsers(users, {
     search,

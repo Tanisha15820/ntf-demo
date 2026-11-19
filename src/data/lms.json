@@ -1,0 +1,209 @@
+{
+  "overviewKpis": [
+    {
+      "id": "total-operators",
+      "title": "Total Operators",
+      "value": 12,
+      "color": "blue"
+    },
+    {
+      "id": "total-sections",
+      "title": "Total Sections",
+      "value": 10,
+      "color": "green"
+    },
+    {
+      "id": "total-courses",
+      "title": "Total Courses",
+      "value": 24,
+      "color": "red"
+    },
+    {
+      "id": "dojo-hiring",
+      "title": "Dojo Hiring",
+      "value": "88.5%",
+      "color": "purple"
+    }
+  ],
+  "testPapers": [
+    {
+      "id": "paper_l0_default",
+      "title": "DOJO L0 BASIC SKILL EVALUATION TEST",
+      "target": "80% or Above",
+      "testType": "Online",
+      "course": "New Manpower for DOJO Hiring (Day-1)",
+      "passing": "80% or Above",
+      "marks": "20 Marks",
+      "fullMarks": "Full Marks",
+      "level": "L0",
+      "plant": "Unit-V Manesar",
+      "department": "ASSEMBLY",
+      "createdAt": 1730000000000,
+      "updatedAt": 1730000000000,
+      "meta": {
+        "testTitle": "DOJO L0 BASIC SKILL EVALUATION TEST",
+        "headerTitle": "SKILL EVALUATION TEST PAPER",
+        "subTitle": "New Manpower for DOJO Hiring (Level 0)",
+        "departments": "ASSEMBLY",
+        "duration": 60,
+        "passPercentage": 80
+      },
+      "sections": [
+        {
+          "id": 1,
+          "name": "Section A - General & Safety",
+          "subtitle": "Multiple Choice Questions",
+          "questions": [
+            {
+              "id": 101,
+              "title": "Q1",
+              "question": "What does 5S stand for in shop-floor workplace organization?",
+              "options": [
+                { "id": 1, "label": "A", "value": "Sort, Set in Order, Shine, Standardize, Sustain" },
+                { "id": 2, "label": "B", "value": "Speed, Safety, System, Service, Structure" },
+                { "id": 3, "label": "C", "value": "Save, Secure, Store, Shift, Supply" },
+                { "id": 4, "label": "D", "value": "Standard, Schedule, Sheet, Station, Shift" }
+              ],
+              "correctOption": 1,
+              "marks": 5,
+              "negativeMarks": 0,
+              "difficulty": "Easy",
+              "required": true,
+              "questionType": "Multiple Choice (MCQ)",
+              "saved": true
+            },
+            {
+              "id": 102,
+              "title": "Q2",
+              "question": "Which PPE is mandatory before entering the injection molding and assembly shop floor?",
+              "options": [
+                { "id": 1, "label": "A", "value": "Casual shoes and cap" },
+                { "id": 2, "label": "B", "value": "Safety shoes, ID card, uniform, and safety goggles" },
+                { "id": 3, "label": "C", "value": "Only ear plugs" },
+                { "id": 4, "label": "D", "value": "None of the above" }
+              ],
+              "correctOption": 2,
+              "marks": 5,
+              "negativeMarks": 0,
+              "difficulty": "Easy",
+              "required": true,
+              "questionType": "Multiple Choice (MCQ)",
+              "saved": true
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Section B - Quality & SOP Adherence",
+          "subtitle": "Standard Operating Procedure Checks",
+          "questions": [
+            {
+              "id": 201,
+              "title": "Q1",
+              "question": "What should an operator do immediately when an abnormal defect or machine sound is detected?",
+              "options": [
+                { "id": 1, "label": "A", "value": "Ignore and continue production" },
+                { "id": 2, "label": "B", "value": "Stop the process, isolate the part, and inform the Line Leader" },
+                { "id": 3, "label": "C", "value": "Mix the defective part with OK parts" },
+                { "id": 4, "label": "D", "value": "Adjust machine parameters without authorization" }
+              ],
+              "correctOption": 2,
+              "marks": 5,
+              "negativeMarks": 0,
+              "difficulty": "Medium",
+              "required": true,
+              "questionType": "Multiple Choice (MCQ)",
+              "saved": true
+            },
+            {
+              "id": 202,
+              "title": "Q2",
+              "question": "Why is First Piece Approval (Setup Approval) required at the start of a shift?",
+              "options": [
+                { "id": 1, "label": "A", "value": "To verify machine parameters and part quality before mass production" },
+                { "id": 2, "label": "B", "value": "To delay production start" },
+                { "id": 3, "label": "C", "value": "Only for attendance calculation" },
+                { "id": 4, "label": "D", "value": "It is optional" }
+              ],
+              "correctOption": 1,
+              "marks": 5,
+              "negativeMarks": 0,
+              "difficulty": "Medium",
+              "required": true,
+              "questionType": "Multiple Choice (MCQ)",
+              "saved": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paper_l1_default",
+      "title": "DOJO L1 PROCESS & QUALITY QUALIFICATION TEST",
+      "target": "80% or Above",
+      "testType": "Online",
+      "course": "Operator Level-1 Qualification (Day-2)",
+      "passing": "80% or Above",
+      "marks": "20 Marks",
+      "fullMarks": "Full Marks",
+      "level": "L1",
+      "plant": "Unit-V Manesar",
+      "department": "QUALITY",
+      "createdAt": 1730086400000,
+      "updatedAt": 1730086400000,
+      "meta": {
+        "testTitle": "DOJO L1 PROCESS & QUALITY QUALIFICATION TEST",
+        "headerTitle": "SKILL EVALUATION TEST PAPER (LEVEL 1)",
+        "subTitle": "Day-2 Process & Quality Qualification",
+        "departments": "QUALITY",
+        "duration": 60,
+        "passPercentage": 80
+      },
+      "sections": [
+        {
+          "id": 1,
+          "name": "Section A - Process Control & Takt Time",
+          "subtitle": "Multiple Choice Questions",
+          "questions": [
+            {
+              "id": 101,
+              "title": "Q1",
+              "question": "What is the maximum allowed operator-induced rejection percentage on part production?",
+              "options": [
+                { "id": 1, "label": "A", "value": "5.0%" },
+                { "id": 2, "label": "B", "value": "0.1%" },
+                { "id": 3, "label": "C", "value": "2.5%" },
+                { "id": 4, "label": "D", "value": "10.0%" }
+              ],
+              "correctOption": 2,
+              "marks": 10,
+              "negativeMarks": 0,
+              "difficulty": "Medium",
+              "required": true,
+              "questionType": "Multiple Choice (MCQ)",
+              "saved": true
+            },
+            {
+              "id": 102,
+              "title": "Q2",
+              "question": "How many consecutive cycles are observed in the Operator Observance Check Sheet?",
+              "options": [
+                { "id": 1, "label": "A", "value": "3 Cycles" },
+                { "id": 2, "label": "B", "value": "5 Cycles" },
+                { "id": 3, "label": "C", "value": "10 Cycles across 7 Days" },
+                { "id": 4, "label": "D", "value": "1 Cycle" }
+              ],
+              "correctOption": 3,
+              "marks": 10,
+              "negativeMarks": 0,
+              "difficulty": "Easy",
+              "required": true,
+              "questionType": "Multiple Choice (MCQ)",
+              "saved": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

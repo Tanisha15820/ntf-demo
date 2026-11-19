@@ -13,9 +13,7 @@ import {
   Users,
   UserCog,
   BookOpen,
-  Building2,
   LayoutDashboard,
-  FileText,
   Edit3,
   Pencil,
   Eye,
@@ -34,7 +32,6 @@ import {
   RefreshCw,
   Lock,
   SlidersHorizontal,
-  Filter,
 } from "lucide-react";
 
 const permissionActions = ["View", "Upload Excel", "Create", "Edit", "Delete"];
@@ -261,7 +258,7 @@ const Roles = () => {
   // Current User Access Control state (GET /api/v1/lms/me/permissions)
   const [myPermissions, setMyPermissions] = useState(null);
   const [loadingMyPerms, setLoadingMyPerms] = useState(true);
-  const [myPermsError, setMyPermsError] = useState("");
+  const [, setMyPermsError] = useState("");
 
   // Derived active privileges for currently logged-in user
   const currentUserAccess = useMemo(() => {
@@ -499,7 +496,7 @@ const Roles = () => {
   };
 
   useEffect(() => {
-    loadAllPages();
+    Promise.resolve().then(() => loadAllPages());
   }, []);
 
   // =========================================================================
@@ -614,7 +611,7 @@ const Roles = () => {
     return () => {
       active = false;
     };
-  }, [reloadKey]);
+  }, [reloadKey, moduleData]);
 
   // =========================================================================
   // API INTEGRATION: GET CURRENT USER ("ME") PERMISSIONS
@@ -690,15 +687,17 @@ const Roles = () => {
 
   useEffect(() => {
     if (isAuthenticated()) {
-      loadMyPermissions();
-      loadUsers();
+      Promise.resolve().then(() => {
+        loadMyPermissions();
+        loadUsers();
+      });
     }
   }, [reloadKey]);
 
   useEffect(() => {
     if (workspaceTab === "users" && isAuthenticated()) {
       if (usersList.length === 0 && !loadingUsers) {
-        loadUsers();
+        Promise.resolve().then(() => loadUsers());
       }
       if (roles.length === 0 && !loadingRoles) {
         RolesApi.getRoles()
@@ -740,7 +739,7 @@ const Roles = () => {
           .catch((err) => console.warn("Failed to load roles on users tab:", err));
       }
     }
-  }, [workspaceTab]);
+  }, [workspaceTab, loadingRoles, loadingUsers, roles.length, usersList.length]);
 
   // =========================================================================
   // API INTEGRATION: ASSIGN ROLE TO USER

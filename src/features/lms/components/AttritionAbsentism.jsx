@@ -1,5 +1,3 @@
-import ManpowerAvailability from "./ManpowerAvailability";
-import BufferManpower from "./BufferManpower";
 import LMSAttrition from "./LMSAttrition";
 import LMSAbsentism from "./LMSAbsentism";
 

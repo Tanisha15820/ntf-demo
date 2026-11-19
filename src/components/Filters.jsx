@@ -404,7 +404,13 @@ const Filters = ({
   }, []);
 
   useEffect(() => {
-    fetchFilterData();
+    let active = true;
+    Promise.resolve().then(() => {
+      if (active) fetchFilterData();
+    });
+    return () => {
+      active = false;
+    };
   }, [fetchFilterData, reloadKey]);
 
   const values = {

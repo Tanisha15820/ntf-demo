@@ -5,7 +5,7 @@ import Navbar from "../../../components/Navbar";
 import OperatorProfileDetails from "../components/OperatorProfileDetails";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { lmsMenus } from "../data/LMSMenu";
-import { OPERATORS_STORAGE_KEY, SEED_OPERATORS, loadOperators, formatDate } from "../utils/operatorUtils";
+import { OPERATORS_STORAGE_KEY, loadOperators, formatDate } from "../utils/operatorUtils";
 
 const OperatorProfile = () => {
   const { id } = useParams();

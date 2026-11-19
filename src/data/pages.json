@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "module": "DASHBOARD",
+    "name": "Executive Dashboard",
+    "pageKey": "dashboard",
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "module": "DASHBOARD",
+    "name": "Attendance Tracker",
+    "pageKey": "attendance",
+    "isActive": true
+  },
+  {
+    "id": 3,
+    "module": "DASHBOARD",
+    "name": "Manpower Requirements",
+    "pageKey": "requirement",
+    "isActive": true
+  },
+  {
+    "id": 4,
+    "module": "LMS",
+    "name": "LMS Overview",
+    "pageKey": "dashboard",
+    "isActive": true
+  },
+  {
+    "id": 5,
+    "module": "LMS",
+    "name": "DOJO Hiring",
+    "pageKey": "dojo-hiring",
+    "isActive": true
+  },
+  {
+    "id": 6,
+    "module": "LMS",
+    "name": "Plant & Hierarchy",
+    "pageKey": "plant",
+    "isActive": true
+  },
+  {
+    "id": 7,
+    "module": "LMS",
+    "name": "10 Cycle Operator Observance",
+    "pageKey": "operator-observance",
+    "isActive": true
+  },
+  {
+    "id": 8,
+    "module": "LMS",
+    "name": "Users Management",
+    "pageKey": "users",
+    "isActive": true
+  },
+  {
+    "id": 9,
+    "module": "LMS",
+    "name": "Roles & Permissions",
+    "pageKey": "roles",
+    "isActive": true
+  },
+  {
+    "id": 10,
+    "module": "LMS",
+    "name": "Training Effectiveness",
+    "pageKey": "training",
+    "isActive": true
+  },
+  {
+    "id": 11,
+    "module": "LMS",
+    "name": "Operators Directory",
+    "pageKey": "operators",
+    "isActive": true
+  },
+  {
+    "id": 12,
+    "module": "CMS",
+    "name": "Content Overview",
+    "pageKey": "overview",
+    "isActive": true
+  },
+  {
+    "id": 13,
+    "module": "CMS",
+    "name": "SOP & Work Instructions",
+    "pageKey": "documents",
+    "isActive": true
+  },
+  {
+    "id": 14,
+    "module": "CMS",
+    "name": "Announcements & Circulars",
+    "pageKey": "announcements",
+    "isActive": true
+  },
+  {
+    "id": 15,
+    "module": "CMS",
+    "name": "Media & Templates",
+    "pageKey": "templates",
+    "isActive": true
+  }
+]

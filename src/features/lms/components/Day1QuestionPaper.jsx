@@ -134,6 +134,48 @@ const PAGE_WIDTH = 1000;
 const PAGE_GAP = 24;
 const TOTAL_PAGES = 2;
 
+// Question component
+const Question = ({ number, question }) => {
+  return (
+    <div className="mb-5 break-inside-avoid">
+      <p className="text-[12px] font-medium leading-[1.4] text-black">
+        <span className="mr-1">{number}.</span>
+        {question.q}
+      </p>
+
+      {question.options.length > 0 ? (
+        <div className="mt-2 pl-4">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+            {question.options.map((option, index) => (
+              <div
+                key={index}
+                className="flex items-start text-[11px] leading-[1.4] text-black"
+              >
+                <span className="mr-1">({ALPHABET[index]})</span>
+
+                <span>{option}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="ml-4 mt-3 w-4/5 border-b border-dotted border-gray-500" />
+      )}
+    </div>
+  );
+};
+
+// Footer
+const Footer = () => {
+  return (
+    <div className="mt-auto flex items-center justify-between px-2 pt-8 text-[10px] text-black">
+      <span>F18(AMD-02)</span>
+
+      <span>Rev. 00</span>
+    </div>
+  );
+};
+
 const Day1QuestionPaper = () => {
   const [info, setInfo] = useState({
     time: "30 मिनट",
@@ -159,48 +201,6 @@ const Day1QuestionPaper = () => {
       ...info,
       [field]: event.target.value,
     });
-  };
-
-  // Question component
-  const Question = ({ number, question }) => {
-    return (
-      <div className="mb-5 break-inside-avoid">
-        <p className="text-[12px] font-medium leading-[1.4] text-black">
-          <span className="mr-1">{number}.</span>
-          {question.q}
-        </p>
-
-        {question.options.length > 0 ? (
-          <div className="mt-2 pl-4">
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
-              {question.options.map((option, index) => (
-                <div
-                  key={index}
-                  className="flex items-start text-[11px] leading-[1.4] text-black"
-                >
-                  <span className="mr-1">({ALPHABET[index]})</span>
-
-                  <span>{option}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="ml-4 mt-3 w-4/5 border-b border-dotted border-gray-500" />
-        )}
-      </div>
-    );
-  };
-
-  // Footer
-  const Footer = () => {
-    return (
-      <div className="mt-auto flex items-center justify-between px-2 pt-8 text-[10px] text-black">
-        <span>F18(AMD-02)</span>
-
-        <span>Rev. 00</span>
-      </div>
-    );
   };
 
   return (

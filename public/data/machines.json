@@ -1,0 +1,110 @@
+[
+  {
+    "id": 301,
+    "plantId": 1,
+    "departmentId": 1,
+    "subDepartmentId": 101,
+    "lineId": 201,
+    "machineName": "M/C 01",
+    "name": "M/C 01"
+  },
+  {
+    "id": 302,
+    "plantId": 1,
+    "departmentId": 1,
+    "subDepartmentId": 101,
+    "lineId": 201,
+    "machineName": "M/C 02",
+    "name": "M/C 02"
+  },
+  {
+    "id": 303,
+    "plantId": 1,
+    "departmentId": 1,
+    "subDepartmentId": 101,
+    "lineId": 202,
+    "machineName": "M/C 03",
+    "name": "M/C 03"
+  },
+  {
+    "id": 304,
+    "plantId": 1,
+    "departmentId": 1,
+    "subDepartmentId": 102,
+    "lineId": 203,
+    "machineName": "M/C 05",
+    "name": "M/C 05"
+  },
+  {
+    "id": 305,
+    "plantId": 1,
+    "departmentId": 2,
+    "subDepartmentId": 103,
+    "lineId": 204,
+    "machineName": "M/C 04",
+    "name": "M/C 04"
+  },
+  {
+    "id": 306,
+    "plantId": 1,
+    "departmentId": 2,
+    "subDepartmentId": 104,
+    "lineId": 205,
+    "machineName": "M/C 06",
+    "name": "M/C 06"
+  },
+  {
+    "id": 307,
+    "plantId": 1,
+    "departmentId": 3,
+    "subDepartmentId": 105,
+    "lineId": 206,
+    "machineName": "CMM Station 01",
+    "name": "CMM Station 01"
+  },
+  {
+    "id": 308,
+    "plantId": 2,
+    "departmentId": 4,
+    "subDepartmentId": 106,
+    "lineId": 207,
+    "machineName": "M/C 02",
+    "name": "M/C 02"
+  },
+  {
+    "id": 309,
+    "plantId": 2,
+    "departmentId": 5,
+    "subDepartmentId": 107,
+    "lineId": 208,
+    "machineName": "IM Press 850T",
+    "name": "IM Press 850T"
+  },
+  {
+    "id": 310,
+    "plantId": 3,
+    "departmentId": 6,
+    "subDepartmentId": 108,
+    "lineId": 209,
+    "machineName": "Spray Robot R1",
+    "name": "Spray Robot R1"
+  },
+  {
+    "id": 311,
+    "plantId": 3,
+    "departmentId": 7,
+    "subDepartmentId": 109,
+    "lineId": 210,
+    "machineName": "CNC Rig 01",
+    "name": "CNC Rig 01"
+  },
+  {
+    "id": 312,
+    "plantId": 4,
+    "departmentId": 8,
+    "subDepartmentId": 110,
+    "lineId": 211,
+    "machineName": "IM Press 1200T",
+    "name": "IM Press 1200T"
+  }
+]

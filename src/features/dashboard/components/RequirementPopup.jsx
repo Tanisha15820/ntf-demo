@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   X,
   ClipboardList,
@@ -6,9 +7,56 @@ import {
   Plus,
   Save,
 } from "lucide-react";
+import {
+  mockDepartments,
+  mockSubDepartments,
+  mockLines,
+} from "../../../data/mockStore";
 
-const RequirementPopup = ({ open, onClose }) => {
+const SHIFTS = ["A", "B", "GEN"];
+
+const RequirementPopup = ({ open, onClose, onSave, initialData = null }) => {
+  const departments = mockDepartments.listRaw();
+  const subDepartments = mockSubDepartments.listRaw();
+  const lines = mockLines.listRaw();
+
+  const [form, setForm] = useState(() => ({
+    department: initialData?.department || initialData?.code || departments[0]?.name || "ASSEMBLY",
+    subDepartment:
+      initialData?.sectionName || subDepartments[0]?.name || "Wiring Harness",
+    line: initialData?.lineDescription || lines[0]?.name || "Line 01",
+    shift: initialData?.shift || "A",
+    sectionName: initialData?.sectionName || "",
+    pp: initialData?.jan?.pp ?? 5,
+    sp: initialData?.jan?.sp ?? 0,
+    fn01: initialData?.jan?.fn01 ?? 0,
+    fn02: initialData?.jan?.fn02 ?? 0,
+    recipientName: "",
+    recipientEmail: "",
+  }));
+
   if (!open) return null;
+
+  const update = (key) => (e) => {
+    setForm((prev) => ({ ...prev, [key]: e.target.value }));
+  };
+
+  const handleSubmit = () => {
+    if (onSave) {
+      onSave({
+        department: form.department,
+        subDepartment: form.sectionName.trim() || form.subDepartment,
+        line: form.line,
+        shift: form.shift,
+        pp: Number(form.pp) || 0,
+        sp: Number(form.sp) || 0,
+        fn01: Number(form.fn01) || 0,
+        fn02: Number(form.fn02) || 0,
+      });
+    } else if (onClose) {
+      onClose();
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex justify-center items-center p-5">
@@ -21,15 +69,18 @@ const RequirementPopup = ({ open, onClose }) => {
 
             <div>
               <h2 className="text-base font-bold text-[#0f172a] leading-tight">
-                Add New Requirement
+                {initialData ? "Edit Requirement" : "Add New Requirement"}
               </h2>
               <p className="text-xs text-[#64748b]">
-                Create a new manpower requirement for a section
+                {initialData
+                  ? "Update manpower requirement details for this section"
+                  : "Create a new manpower requirement for a section"}
               </p>
             </div>
           </div>
 
           <button
+            type="button"
             onClick={onClose}
             className="h-8 w-8 rounded-lg border border-[#e2edf2] flex items-center justify-center text-[#64748b] hover:border-[#0d9488] hover:text-[#0d9488] transition"
           >
@@ -49,32 +100,64 @@ const RequirementPopup = ({ open, onClose }) => {
               </h3>
             </div>
 
-            <div className="grid grid-cols-4 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
               <div>
                 <label className="text-xs text-[#64748b]">Department</label>
-                <select className="mt-1.5 w-full border border-[#e2edf2] rounded-xl h-9 px-2.5 text-xs text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white">
-                  <option>Select Department</option>
+                <select
+                  value={form.department}
+                  onChange={update("department")}
+                  className="mt-1.5 w-full border border-[#e2edf2] rounded-xl h-9 px-2.5 text-xs text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white"
+                >
+                  {departments.map((d) => (
+                    <option key={d.id} value={d.name}>
+                      {d.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
               <div>
                 <label className="text-xs text-[#64748b]">Sub Department</label>
-                <select className="mt-1.5 w-full border border-[#e2edf2] rounded-xl h-9 px-2.5 text-xs text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white">
-                  <option>Select Sub Department</option>
+                <select
+                  value={form.subDepartment}
+                  onChange={update("subDepartment")}
+                  className="mt-1.5 w-full border border-[#e2edf2] rounded-xl h-9 px-2.5 text-xs text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white"
+                >
+                  {subDepartments.map((sd) => (
+                    <option key={sd.id} value={sd.name}>
+                      {sd.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
               <div>
                 <label className="text-xs text-[#64748b]">Line</label>
-                <select className="mt-1.5 w-full border border-[#e2edf2] rounded-xl h-9 px-2.5 text-xs text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white">
-                  <option>Select Line</option>
+                <select
+                  value={form.line}
+                  onChange={update("line")}
+                  className="mt-1.5 w-full border border-[#e2edf2] rounded-xl h-9 px-2.5 text-xs text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white"
+                >
+                  {lines.map((l) => (
+                    <option key={l.id} value={l.name}>
+                      {l.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
               <div>
                 <label className="text-xs text-[#64748b]">Shift</label>
-                <select className="mt-1.5 w-full border border-[#e2edf2] rounded-xl h-9 px-2.5 text-xs text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white">
-                  <option>Select Shift</option>
+                <select
+                  value={form.shift}
+                  onChange={update("shift")}
+                  className="mt-1.5 w-full border border-[#e2edf2] rounded-xl h-9 px-2.5 text-xs text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white"
+                >
+                  {SHIFTS.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -82,6 +165,8 @@ const RequirementPopup = ({ open, onClose }) => {
             <div className="mt-2.5">
               <label className="text-xs text-[#64748b]">Section Name</label>
               <input
+                value={form.sectionName}
+                onChange={update("sectionName")}
                 placeholder="Enter Section Name"
                 className="mt-1.5 h-9 text-xs border border-[#e2edf2] rounded-xl px-2.5 w-full text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white placeholder:text-[#94a3b8]"
               />
@@ -102,15 +187,21 @@ const RequirementPopup = ({ open, onClose }) => {
             </div>
 
             <div className="grid grid-cols-4 gap-2.5">
-              {["PP", "SP", "FN01", "FN02"].map((item) => (
-                <div key={item}>
+              {[
+                { label: "PP", key: "pp" },
+                { label: "SP", key: "sp" },
+                { label: "FN01", key: "fn01" },
+                { label: "FN02", key: "fn02" },
+              ].map((item) => (
+                <div key={item.key}>
                   <label className="block text-center text-[#0f172a] mb-1.5 font-medium text-xs">
-                    {item}
+                    {item.label}
                   </label>
 
                   <input
                     type="number"
-                    defaultValue={0}
+                    value={form[item.key]}
+                    onChange={update(item.key)}
                     className="w-full h-9 text-xs border border-[#e2edf2] rounded-xl text-center text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white"
                   />
                 </div>
@@ -133,6 +224,8 @@ const RequirementPopup = ({ open, onClose }) => {
               <div className="col-span-4">
                 <label className="text-xs text-[#64748b]">Recipient Name</label>
                 <input
+                  value={form.recipientName}
+                  onChange={update("recipientName")}
                   className="mt-1.5 w-full h-9 text-xs border border-[#e2edf2] rounded-xl px-2.5 text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white placeholder:text-[#94a3b8]"
                   placeholder="Recipient Name"
                 />
@@ -141,13 +234,25 @@ const RequirementPopup = ({ open, onClose }) => {
               <div className="col-span-5">
                 <label className="text-xs text-[#64748b]">Email Address</label>
                 <input
+                  value={form.recipientEmail}
+                  onChange={update("recipientEmail")}
                   className="mt-1.5 w-full h-9 text-xs border border-[#e2edf2] rounded-xl px-2.5 text-[#0f172a] focus:ring-2 focus:ring-[#0d9488]/15 focus:border-[#0d9488] outline-none bg-white placeholder:text-[#94a3b8]"
                   placeholder="Email Address"
                 />
               </div>
 
               <div className="col-span-3 flex items-end">
-                <button className="w-full h-9 text-xs border border-[#0d9488]/20 bg-[#e6f7f5] text-[#0d9488] rounded-xl flex justify-center items-center gap-1.5 hover:bg-[#d5f2ee] transition font-medium">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setForm((prev) => ({
+                      ...prev,
+                      recipientName: "",
+                      recipientEmail: "",
+                    }))
+                  }
+                  className="w-full h-9 text-xs border border-[#0d9488]/20 bg-[#e6f7f5] text-[#0d9488] rounded-xl flex justify-center items-center gap-1.5 hover:bg-[#d5f2ee] transition font-medium"
+                >
                   <Plus size={14} />
                   Add Recipient
                 </button>
@@ -159,13 +264,18 @@ const RequirementPopup = ({ open, onClose }) => {
         {/* Footer */}
         <div className="flex justify-end gap-3 px-5 py-3 border-t border-[#e2edf2] bg-[#f8fafc] shrink-0">
           <button
+            type="button"
             onClick={onClose}
             className="px-4 h-9 rounded-xl text-xs font-semibold border border-[#e2edf2] bg-white text-[#64748b] hover:border-[#0d9488] hover:text-[#0d9488] transition"
           >
             Cancel
           </button>
 
-          <button className="px-4 h-9 rounded-xl text-xs font-semibold bg-gradient-to-r from-[#0d9488] to-[#14b8a6] hover:from-[#0f766e] hover:to-[#0d9488] text-white shadow-sm shadow-[#0d9488]/25 transition flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="px-4 h-9 rounded-xl text-xs font-semibold bg-gradient-to-r from-[#0d9488] to-[#14b8a6] hover:from-[#0f766e] hover:to-[#0d9488] text-white shadow-sm shadow-[#0d9488]/25 transition flex items-center gap-1.5"
+          >
             <Save size={14} />
             Save Requirement
           </button>

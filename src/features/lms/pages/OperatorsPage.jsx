@@ -3,7 +3,6 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import VerifiedUserOutlinedIcon from "@mui/icons-material/VerifiedUserOutlined";
 import PersonOffOutlinedIcon from "@mui/icons-material/PersonOffOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
-import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import Sidebar from "../../../components/Sidebar";
 import Navbar from "../../../components/Navbar";
 import KPICards from "../../../components/KPICards";

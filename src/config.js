@@ -1,12 +1,14 @@
-const rawBaseUrl = import.meta.env.VITE_BASE_URL || "";
+const rawBasePath = import.meta.env.VITE_BASE_PATH || "";
 
 const toBasePath = (url) => {
-  if (!url) return "";
+  if (!url || url === "/") return "";
   try {
-    return new URL(url).pathname.replace(/\/+$/, "");
+    const pathname = new URL(url).pathname.replace(/\/+$/, "");
+    return pathname === "/api" ? "" : pathname;
   } catch {
-    return url;
+    const cleaned = String(url).replace(/\/+$/, "");
+    return cleaned === "/api" ? "" : cleaned;
   }
 };
 
-export const BASE_URL = toBasePath(rawBaseUrl);
+export const BASE_URL = toBasePath(rawBasePath);

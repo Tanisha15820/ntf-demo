@@ -15,7 +15,6 @@ import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDown
 // import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 
 const QuestionForm = ({
-  activeSection,
   question,
   questionIndex = 0,
   totalQuestionsCount = 1,
@@ -30,8 +29,6 @@ const QuestionForm = ({
     correctOption,
     marks = 1,
     negativeMarks = 0,
-    difficulty = "Medium",
-    required = true,
     questionType = "Multiple Choice (MCQ)",
   } = question;
 

@@ -12,7 +12,6 @@ const DATA = {
 const QuestionInstructions = ({
   instructions = DATA,
   meta = {},
-  totalQuestionsCount = 0,
 }) => {
   const testTitle = meta.testTitle || "SKILL EVALUATION TEST PAPER";
   const department = meta.departments || "Production";

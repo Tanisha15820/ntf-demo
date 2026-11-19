@@ -1,13 +1,22 @@
+import { mockLms } from "../../../data/mockStore";
+
 const TEST_PAPERS_KEY = "ntf_test_papers";
 
 export const getSavedPapers = () => {
   try {
     const raw = localStorage.getItem(TEST_PAPERS_KEY);
-    if (!raw) return [];
+    if (!raw) {
+      const seeded = mockLms.getSeedTestPapers();
+      localStorage.setItem(TEST_PAPERS_KEY, JSON.stringify(seeded));
+      return seeded;
+    }
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    const seeded = mockLms.getSeedTestPapers();
+    localStorage.setItem(TEST_PAPERS_KEY, JSON.stringify(seeded));
+    return seeded;
   } catch {
-    return [];
+    return mockLms.getSeedTestPapers();
   }
 };
 

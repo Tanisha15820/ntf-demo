@@ -1,0 +1,105 @@
+{
+  "roles": [
+    {
+      "id": 1,
+      "name": "Super Admin",
+      "type": "System",
+      "description": "Full platform governance with unrestricted access to Dashboard, LMS, and CMS modules",
+      "isActive": true,
+      "status": true,
+      "users": 2,
+      "userCount": 2
+    },
+    {
+      "id": 2,
+      "name": "HR & Admin",
+      "type": "Custom",
+      "description": "Manage plant personnel, attendance sheets, departmental structures, and HR policies",
+      "isActive": true,
+      "status": true,
+      "users": 2,
+      "userCount": 2
+    },
+    {
+      "id": 3,
+      "name": "Plant Supervisor",
+      "type": "Custom",
+      "description": "Daily manpower monitoring, line allocation, attendance oversight, and 10-cycle observance audits",
+      "isActive": true,
+      "status": true,
+      "users": 4,
+      "userCount": 4
+    },
+    {
+      "id": 4,
+      "name": "Quality Inspector",
+      "type": "Custom",
+      "description": "Operator evaluation sheets, SOP document management, and training effectiveness verification",
+      "isActive": true,
+      "status": true,
+      "users": 2,
+      "userCount": 2
+    },
+    {
+      "id": 5,
+      "name": "DOJO Trainer",
+      "type": "Custom",
+      "description": "Manage L0/L1 question papers, onboarding schedules, operator skill evaluations, and training templates",
+      "isActive": true,
+      "status": true,
+      "users": 3,
+      "userCount": 3
+    }
+  ],
+  "rolePermissions": {
+    "1": [
+      { "pageId": 1, "pageKey": "dashboard", "module": "DASHBOARD", "name": "Executive Dashboard", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 2, "pageKey": "attendance", "module": "DASHBOARD", "name": "Attendance Tracker", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 3, "pageKey": "requirement", "module": "DASHBOARD", "name": "Manpower Requirements", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 4, "pageKey": "dashboard", "module": "LMS", "name": "LMS Overview", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 5, "pageKey": "dojo-hiring", "module": "LMS", "name": "DOJO Hiring", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 6, "pageKey": "plant", "module": "LMS", "name": "Plant & Hierarchy", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 7, "pageKey": "operator-observance", "module": "LMS", "name": "10 Cycle Operator Observance", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 8, "pageKey": "users", "module": "LMS", "name": "Users Management", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 9, "pageKey": "roles", "module": "LMS", "name": "Roles & Permissions", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 10, "pageKey": "training", "module": "LMS", "name": "Training Effectiveness", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 11, "pageKey": "operators", "module": "LMS", "name": "Operators Directory", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 12, "pageKey": "overview", "module": "CMS", "name": "Content Overview", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 13, "pageKey": "documents", "module": "CMS", "name": "SOP & Work Instructions", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 14, "pageKey": "announcements", "module": "CMS", "name": "Announcements & Circulars", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 15, "pageKey": "templates", "module": "CMS", "name": "Media & Templates", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true }
+    ],
+    "2": [
+      { "pageId": 1, "pageKey": "dashboard", "module": "DASHBOARD", "name": "Executive Dashboard", "canView": true, "canCreate": false, "canEdit": false, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 2, "pageKey": "attendance", "module": "DASHBOARD", "name": "Attendance Tracker", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 3, "pageKey": "requirement", "module": "DASHBOARD", "name": "Manpower Requirements", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 8, "pageKey": "users", "module": "LMS", "name": "Users Management", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 11, "pageKey": "operators", "module": "LMS", "name": "Operators Directory", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 12, "pageKey": "overview", "module": "CMS", "name": "Content Overview", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 14, "pageKey": "announcements", "module": "CMS", "name": "Announcements & Circulars", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": false, "hasAccess": true }
+    ],
+    "3": [
+      { "pageId": 1, "pageKey": "dashboard", "module": "DASHBOARD", "name": "Executive Dashboard", "canView": true, "canCreate": false, "canEdit": false, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 2, "pageKey": "attendance", "module": "DASHBOARD", "name": "Attendance Tracker", "canView": true, "canCreate": false, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 3, "pageKey": "requirement", "module": "DASHBOARD", "name": "Manpower Requirements", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 4, "pageKey": "dashboard", "module": "LMS", "name": "LMS Overview", "canView": true, "canCreate": false, "canEdit": false, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 6, "pageKey": "plant", "module": "LMS", "name": "Plant & Hierarchy", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 7, "pageKey": "operator-observance", "module": "LMS", "name": "10 Cycle Operator Observance", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 13, "pageKey": "documents", "module": "CMS", "name": "SOP & Work Instructions", "canView": true, "canCreate": false, "canEdit": false, "canDelete": false, "canUploadExcel": false, "hasAccess": true }
+    ],
+    "4": [
+      { "pageId": 4, "pageKey": "dashboard", "module": "LMS", "name": "LMS Overview", "canView": true, "canCreate": false, "canEdit": false, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 7, "pageKey": "operator-observance", "module": "LMS", "name": "10 Cycle Operator Observance", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 10, "pageKey": "training", "module": "LMS", "name": "Training Effectiveness", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 12, "pageKey": "overview", "module": "CMS", "name": "Content Overview", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 13, "pageKey": "documents", "module": "CMS", "name": "SOP & Work Instructions", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": true, "hasAccess": true }
+    ],
+    "5": [
+      { "pageId": 4, "pageKey": "dashboard", "module": "LMS", "name": "LMS Overview", "canView": true, "canCreate": false, "canEdit": false, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 5, "pageKey": "dojo-hiring", "module": "LMS", "name": "DOJO Hiring", "canView": true, "canCreate": true, "canEdit": true, "canDelete": true, "canUploadExcel": true, "hasAccess": true },
+      { "pageId": 7, "pageKey": "operator-observance", "module": "LMS", "name": "10 Cycle Operator Observance", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 10, "pageKey": "training", "module": "LMS", "name": "Training Effectiveness", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": false, "hasAccess": true },
+      { "pageId": 15, "pageKey": "templates", "module": "CMS", "name": "Media & Templates", "canView": true, "canCreate": true, "canEdit": true, "canDelete": false, "canUploadExcel": true, "hasAccess": true }
+    ]
+  }
+}

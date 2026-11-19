@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "plantName": "Unit-V Manesar",
+    "name": "Unit-V Manesar",
+    "plantLocation": "Unit-V Manesar",
+    "code": "PLT-01",
+    "city": "Manesar, Gurugram"
+  },
+  {
+    "id": 2,
+    "plantName": "Unit-II Gurgaon",
+    "name": "Unit-II Gurgaon",
+    "plantLocation": "Unit-II Gurgaon",
+    "code": "PLT-02",
+    "city": "Sector 37, Gurugram"
+  },
+  {
+    "id": 3,
+    "plantName": "Unit-III Bawal",
+    "name": "Unit-III Bawal",
+    "plantLocation": "Unit-III Bawal",
+    "code": "PLT-03",
+    "city": "IMT Bawal, Rewari"
+  },
+  {
+    "id": 4,
+    "plantName": "Unit-IV Rohtak",
+    "name": "Unit-IV Rohtak",
+    "plantLocation": "Unit-IV Rohtak",
+    "code": "PLT-04",
+    "city": "IMT Rohtak, Haryana"
+  }
+]

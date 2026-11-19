@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "plantId": 1,
+    "departmentName": "ASSEMBLY",
+    "name": "ASSEMBLY"
+  },
+  {
+    "id": 2,
+    "plantId": 1,
+    "departmentName": "ACCESSORIES",
+    "name": "ACCESSORIES"
+  },
+  {
+    "id": 3,
+    "plantId": 1,
+    "departmentName": "QUALITY",
+    "name": "QUALITY"
+  },
+  {
+    "id": 4,
+    "plantId": 2,
+    "departmentName": "STORE",
+    "name": "STORE"
+  },
+  {
+    "id": 5,
+    "plantId": 2,
+    "departmentName": "MOLDING",
+    "name": "MOLDING"
+  },
+  {
+    "id": 6,
+    "plantId": 3,
+    "departmentName": "PAINT SHOP",
+    "name": "PAINT SHOP"
+  },
+  {
+    "id": 7,
+    "plantId": 3,
+    "departmentName": "MAINTENANCE",
+    "name": "MAINTENANCE"
+  },
+  {
+    "id": 8,
+    "plantId": 4,
+    "departmentName": "PRODUCTION",
+    "name": "PRODUCTION"
+  }
+]
